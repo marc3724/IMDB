@@ -1,18 +1,27 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class User {
-    String tconst;
-    String PrimaryTitle;
-    String OriginalTitle;
-    int StartYear;
-    int EndYear;
+    String nconst;
+    String primaryName ;
+    int birthYear ;
+    int deathYear ;
+    professions[] primaryProfession ;
+    ArrayList knownForTitles;
+
+
+    public User(String nconst, String primaryName, int birthYear, int deathYear, professions[] primaryProfession, ArrayList knownForTitles) {
+        this.nconst = nconst;
+        this.primaryName = primaryName;
+        this.birthYear = birthYear;
+        this.deathYear = deathYear;
+        this.primaryProfession = primaryProfession;
+        this.knownForTitles = knownForTitles;
+    }
+
 
     public User (){
     }
 
-    public User(String tconst, String primaryTitle, String originalTitle, int startYear, int endYear) {
-        this.tconst = tconst;
-        PrimaryTitle = primaryTitle;
-        OriginalTitle = originalTitle;
-        StartYear = startYear;
-        EndYear = endYear;
-    }
+
 }
