@@ -3,27 +3,49 @@ import java.sql.*;
 public class DBSQL {
 
     private static Connection connection;
+//"trustServerCertificate=true;" ;
 
-    public static void main(String[] args) {
-        connectToDatabase();
-    }
-
-    public static Connection connectToDatabase(){
-        String url = "jdbc:sqlserver://localhost:1434;" +
-                "trustServerCertificate=true;" ;
-        String user = "sa";
+    public Connection connectToDatabase(){
+        String url = "jdbc:sqlserver://localhost:1434;databaseName=IncrediblyMediocreDramaBox;trustServerCertificate=true;";
+        String username = "sa";
         String password = "1234";
+
         try {
-            connection = DriverManager.getConnection(url, user, password);
-            System.out.println("connection established");
+            connection = DriverManager.getConnection(url, username, password);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return connection;
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+
+    public void searchMovie (){
+        String searchMovieTitleSQL = "{call search_Movie_Title(?)}";
+        try {
+            CallableStatement searchMovieTitleStatement = connection.prepareCall(searchMovieTitleSQL);
+
+            String movieTitle = "The Matrix";
+            searchMovieTitleStatement.setString(1, movieTitle);
+            ResultSet movieResults = searchMovieTitleStatement.executeQuery();
+            while (movieResults.next()) {
+                System.out.println(movieResults.getString("title"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void searchPerson (String name){
+        String searchPersonSQL = "{call Search_Person(?)}";
+        try {
+            CallableStatement searchPersonStatement = connection.prepareCall(searchPersonSQL);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void test() {
-        connectToDatabase();
 
         int id = 14;
         String Name = "Marcus";
