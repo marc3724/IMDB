@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.List;
 
-public class User {
+public class Person {
     String PersonID;
     String primaryName ;
     int birthYear ;
@@ -31,7 +31,7 @@ public class User {
 
 
 
-    public User(String nconst, String primaryName, int birthYear, Integer deathYear, String[] primaryProfession, String[] knownForTitles) {
+    public Person(String nconst, String primaryName, int birthYear, Integer deathYear, String[] primaryProfession, String[] knownForTitles) {
         this.PersonID = nconst;
         this.primaryName = primaryName;
         this.birthYear = birthYear;
@@ -41,7 +41,7 @@ public class User {
     }
 
 
-    public User (){
+    public Person(){
 
     }
 

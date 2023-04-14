@@ -4,19 +4,21 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-    menu();
+        menu();
     }
 
-    public static void menu (){
+    public static void menu ()  {
         int valg=1;
         Scanner input = new Scanner(System.in);
         DBSQL db = new DBSQL();
 
         while(valg!=0) {
-            System.out.println("1. search for a movie\n" +
+            System.out.println("" +
+                    "1. search for a movie\n" +
                     "2. search for a person \n" +
                     "3. add a movie to the database\n" +
                     "4. add a person to the database\n" +
+                    "5. delete a movie form the database\n"+
                     /*
                     System.out.println("5. Udskriv alle oplysninger om alle studerende ");
                     System.out.println("6. Udskriv alle oplysninger om en studerende ");
@@ -47,6 +49,10 @@ public class Main {
 
                 case 4://add a person
                     createPerson(db);
+                    break;
+                case 5:
+                    System.out.println("write the ttconst of the move you wish to delete");
+                    db.deleteMovie(input.next());
                     break;
 
                 case 0:
@@ -103,25 +109,25 @@ public class Main {
     }
 
     public static void createPerson(DBSQL db) {
-        User user = new User();
+        Person person = new Person();
         Scanner scanner = new Scanner(System.in);
 
 
         System.out.print("Enter PersonID: ");
-        user.setPersonID(scanner.nextLine());
+        person.setPersonID(scanner.nextLine());
 
         System.out.print("Enter name: ");
-        user.setPrimaryName(scanner.nextLine());
+        person.setPrimaryName(scanner.nextLine());
 
         System.out.print("Enter birth year: ");
-        user.setBirthYear(scanner.nextInt());
+        person.setBirthYear(scanner.nextInt());
         scanner.nextLine(); // consume the remaining newline character
 
         //todo fix DeathYear er Strings her men INTEGER senere
         System.out.print("Enter death year (or leave blank if not applicable): ");
         String deathYear = scanner.nextLine();
         if (!deathYear.isEmpty()) {
-            user.setDeathYear(Integer.parseInt(deathYear));
+            person.setDeathYear(Integer.parseInt(deathYear));
         }
 
         System.out.print("Enter profession 1: ");
@@ -130,7 +136,7 @@ public class Main {
         System.out.print("Enter profession 2: ");
         String profession2 = scanner.nextLine();
 
-        user.setProfession(new String[] { profession1, profession2 });
+        person.setProfession(new String[] { profession1, profession2 });
 
 
         System.out.print("Enter Known for titles (tconst1) ");
@@ -145,8 +151,8 @@ public class Main {
         System.out.print("Enter Known for titles (tconst4) ");
         String tconst4 = scanner.nextLine();
 
-        user.setKnownForTitles(new String[] { tconst1, tconst2,tconst3,tconst4 });
+        person.setKnownForTitles(new String[] { tconst1, tconst2,tconst3,tconst4 });
 
-        db.addUser(user);
+        db.addUser(person);
     }
 }

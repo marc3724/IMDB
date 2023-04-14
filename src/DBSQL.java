@@ -6,7 +6,7 @@ public class DBSQL {
 
 
     public static Connection connectToDatabase(){
-        String url = "jdbc:sqlserver://localhost:1434;databaseName=IMDB;trustServerCertificate=true;";
+        String url = "jdbc:sqlserver://localhost:1234;databaseName=IMDB;encrypt=true;trustServerCertificate=true;";
         String username = "sa";
         String password = "1234";
 
@@ -68,6 +68,19 @@ public class DBSQL {
         closeConnection();
     }
 
+    public void deleteMovie(String movieId)  {
+        connectToDatabase();
+        try {
+            CallableStatement stmt = connection.prepareCall("{CALL deleteMovie(?)}");
+            stmt.setObject(1, movieId);
+            stmt.executeUpdate();
+
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        closeConnection();
+    }
+
 
     //------------------------------------------------------------------------------------------------------------------
     //add functions
@@ -89,8 +102,12 @@ public class DBSQL {
         stmt.setString(11, movie.getGenres()[2]);*/
         stmt.executeUpdate();
     }
+    public void addgenre(Movie movie) throws SQLException {
 
-    public static void addUser(User user) {
+    }
+
+
+    public void addUser(Person user) {
         try {
             connectToDatabase();
 
@@ -136,6 +153,9 @@ public class DBSQL {
 
 
     //------------------------------------------------------------------------------------------------------------------
+
+
+
 
     public static void test() {
 
